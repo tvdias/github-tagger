@@ -1,10 +1,10 @@
-import * as core from '@actions/core';
-import * as github from '@actions/github';
+import * as core from "@actions/core";
+import * as github from "@actions/github";
 
 async function run() {
   try {
-    const token = core.getInput('repo-token', {required: true});
-    const tag = core.getInput('tag', {required: true});
+    const token = core.getInput("repo-token", { required: true });
+    const tag = core.getInput("tag", { required: true });
     const sha = github.context.sha;
 
     const client = new github.GitHub(token);
@@ -16,7 +16,6 @@ async function run() {
       ref: `refs/tags/${tag}`,
       sha: sha
     });
-
   } catch (error) {
     core.error(error);
     core.setFailed(error.message);
