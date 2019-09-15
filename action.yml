@@ -1,10 +1,12 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+name: 'Commit tagger'
+description: 'Tag commit with a given version'
+author: 'Thiago Vaz Dias'
+inputs: 
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+  tag:
+    description: 'Tag text'
+    default: '0.1.0'
 runs:
   using: 'node12'
   main: 'lib/main.js'
