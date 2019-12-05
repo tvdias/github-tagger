@@ -16,7 +16,7 @@ jobs:
     
     steps:
     - name: Tag commit
-      uses: tvdias/github-tagger
+      uses: tvdias/github-tagger@v0.0.1
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         tag: "my_tag"
