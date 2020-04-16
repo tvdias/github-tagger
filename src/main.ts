@@ -5,7 +5,7 @@ async function run() {
   try {
     const token = core.getInput('repo-token', {required: true});
     const tag = core.getInput('tag', {required: true});
-    const sha = github.context.sha;
+    const sha = core.getInput('commit-sha', {required: false}) || github.context.sha;
 
     const client = new github.GitHub(token);
 

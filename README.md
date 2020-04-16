@@ -21,3 +21,15 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         tag: "my_tag"
 ```
+
+An optional commit sha can be specified to override the default
+
+```
+    steps:
+    - name: Tag commit
+      uses: tvdias/github-tagger@v0.0.1
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        tag: "my_tag"
+        commit-sha: abc123
+```
