@@ -11,4 +11,4 @@ inputs:
     description: optional commit sha to apply the tag to
 runs:
   using: 'node12'
-  main: 'lib/main.js'
+  main: 'dist/index.js'
