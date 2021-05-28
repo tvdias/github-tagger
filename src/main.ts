@@ -11,6 +11,9 @@ async function run() {
     const client = new github.GitHub(token);
 
     core.debug(`tagging #${sha} with tag ${tag}`);
+
+    core.debug(`delete ref ${tag}`);
+
     await client.git.deleteRef({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
