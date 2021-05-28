@@ -12,13 +12,15 @@ async function run() {
 
     core.debug(`tagging #${sha} with tag ${tag}`);
 
-    core.debug(`delete ref ${tag}`);
-
-    var result = await client.git.getRef({
+    var params = {
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       ref: `refs/tags/${tag}`
-    });
+    };
+
+    core.debug(JSON.stringify(params));
+
+    var result = await client.git.getRef(params);
 
     core.debug("result ${result}");
 
