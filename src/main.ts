@@ -11,17 +11,13 @@ async function run() {
     const client = new github.GitHub(token);
 
     core.debug(`tagging #${sha} with tag ${tag}`);
-    await client.git.deleteRef({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      ref: `refs/tags/${tag}`
-    });
 
     await client.git.updateRef({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       ref: `refs/tags/${tag}`,
-      sha: sha
+      sha: sha,
+      force: true
     });
   } catch (error) {
     core.error(error);
