@@ -32,17 +32,18 @@ async function run() {
 
     core.debug(`result ${result}`);
 
-    await client.git.deleteRef({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      ref: `refs/tags/${tag}`
-    });
+    // await client.git.deleteRef({
+    //   owner: github.context.repo.owner,
+    //   repo: github.context.repo.repo,
+    //   ref: `refs/tags/${tag}`
+    // });
 
     await client.git.updateRef({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
-      ref: `refs/tags/${tag}`,
-      sha: sha
+      ref: `tags/${tag}`,
+      sha: sha,
+      force: true
     });
   } catch (error) {
     core.error(error);
