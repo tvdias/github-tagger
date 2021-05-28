@@ -12,13 +12,19 @@ async function run() {
 
     core.debug(`tagging #${sha} with tag ${tag}`);
 
-    var params = {
+    const params = {
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
       ref: `refs/tags/${tag}`
     };
 
     core.debug(JSON.stringify(params));
+
+    const exists = await client
+      .request(`GET /repos/:owner/:repo/git/:ref`, params)
+      .catch(_ => false);
+
+    core.debug(exists ? "exists" : "not exists");
 
     core.debug(`get ref`);
 
