@@ -34,6 +34,12 @@ function run() {
             const client = new github.GitHub(token);
             core.debug(`tagging #${sha} with tag ${tag}`);
             core.debug(`delete ref ${tag}`);
+            var result = yield client.git.getRef({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                ref: `refs/tags/${tag}`
+            });
+            core.debug("result ${result}");
             yield client.git.deleteRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,

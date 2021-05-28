@@ -14,6 +14,14 @@ async function run() {
 
     core.debug(`delete ref ${tag}`);
 
+    var result = await client.git.getRef({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      ref: `refs/tags/${tag}`
+    });
+
+    core.debug("result ${result}");
+
     await client.git.deleteRef({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
