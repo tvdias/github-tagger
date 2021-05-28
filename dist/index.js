@@ -33,12 +33,16 @@ function run() {
             const sha = core.getInput("commit-sha", { required: false }) || github.context.sha;
             const client = new github.GitHub(token);
             core.debug(`tagging #${sha} with tag ${tag}`);
+            yield client.git.deleteRef({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                ref: `refs/tags/${tag}`
+            });
             yield client.git.updateRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 ref: `refs/tags/${tag}`,
-                sha: sha,
-                force: true
+                sha: sha
             });
         }
         catch (error) {
