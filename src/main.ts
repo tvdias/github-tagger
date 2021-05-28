@@ -15,7 +15,7 @@ async function run() {
     const params = {
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
-      ref: `refs/tags/${tag}`
+      ref: `tags/${tag}`
     };
 
     core.debug(JSON.stringify(params));
