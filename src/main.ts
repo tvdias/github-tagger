@@ -20,9 +20,11 @@ async function run() {
 
     core.debug(JSON.stringify(params));
 
+    core.debug(`get ref`);
+
     var result = await client.git.getRef(params);
 
-    core.debug("result ${result}");
+    core.debug(`result ${result}`);
 
     await client.git.deleteRef({
       owner: github.context.repo.owner,
