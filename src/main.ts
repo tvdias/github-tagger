@@ -22,9 +22,8 @@ async function run() {
       })
       .catch(_ => false);
 
-    core.debug(`result ${JSON.stringify(exists)}`);
-
     if (exists) {
+      core.debug(`update ref`);
       await client.git.updateRef({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
@@ -33,6 +32,7 @@ async function run() {
         force: true
       });
     } else {
+      core.debug(`create ref`);
       await client.git.createRef({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,

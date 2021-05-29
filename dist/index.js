@@ -41,8 +41,8 @@ function run() {
                 ref: `tags/${tag}`
             })
                 .catch(_ => false);
-            core.debug(`result ${JSON.stringify(exists)}`);
             if (exists) {
+                core.debug(`update ref`);
                 yield client.git.updateRef({
                     owner: github.context.repo.owner,
                     repo: github.context.repo.repo,
@@ -52,6 +52,7 @@ function run() {
                 });
             }
             else {
+                core.debug(`create ref`);
                 yield client.git.createRef({
                     owner: github.context.repo.owner,
                     repo: github.context.repo.repo,
