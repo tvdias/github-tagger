@@ -12,6 +12,18 @@ async function run() {
 
     core.debug(`tagging #${sha} with tag ${tag}`);
 
+    core.debug(`get ref`);
+
+    var result = await client.git
+      .getRef({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        ref: `tags/${tag}`
+      })
+      .catch(_ => false);
+
+    core.debug(`result ${result}`);
+
     await client.git.updateRef({
       owner: github.context.repo.owner,
       repo: github.context.repo.repo,
