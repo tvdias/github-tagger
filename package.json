@@ -1,6 +1,6 @@
 {
   "name": "github-tagger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "Tags the commit with a given text",
   "main": "lib/main.js",
@@ -8,7 +8,9 @@
     "build": "tsc",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
-    "test": "jest"
+    "test": "jest",
+    "package": "ncc build",
+    "all": "npm run format && npm run build && npm run package && npm run format-check"
   },
   "repository": {
     "type": "git",
@@ -28,7 +30,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.4",
-    "husky": "^2.3.0",
+    "husky": "^2.7.0",
     "jest": "^24.8.0",
     "jest-circus": "^24.7.1",
     "prettier": "^1.17.1",
@@ -38,8 +40,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "npm run build && npm run format",
-      "post-commit": "npm prune --production && git add node_modules/* && git commit -m \"Husky commit correct node modules\""
+      "pre-commit": "npm run all"
     }
   }
 }
