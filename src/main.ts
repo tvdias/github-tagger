@@ -14,15 +14,13 @@ async function run() {
 
     core.debug(`get ref`);
 
-    var result = await client.git
-      .getRef({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        ref: `tags/${tag}`
-      })
-      .catch(_ => false);
+    const result = await client.git.getRef({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      ref: `tags/${tag}`
+    });
 
-    core.debug(`result ${result}`);
+    core.debug(`result ${JSON.stringify(result)}`);
 
     await client.git.updateRef({
       owner: github.context.repo.owner,

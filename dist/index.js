@@ -34,14 +34,12 @@ function run() {
             const client = new github.GitHub(token);
             core.debug(`tagging #${sha} with tag ${tag}`);
             core.debug(`get ref`);
-            var result = yield client.git
-                .getRef({
+            const result = yield client.git.getRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 ref: `tags/${tag}`
-            })
-                .catch(_ => false);
-            core.debug(`result ${result}`);
+            });
+            core.debug(`result ${JSON.stringify(result)}`);
             yield client.git.updateRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
