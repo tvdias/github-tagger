@@ -14,21 +14,32 @@ async function run() {
 
     core.debug(`get ref`);
 
-    const result = await client.git.getRef({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      ref: `tags/${tag}`
-    });
+    const exists = await client.git
+      .getRef({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        ref: `tags/${tag}`
+      })
+      .catch(_ => false);
 
-    core.debug(`result ${JSON.stringify(result)}`);
+    core.debug(`result ${JSON.stringify(exists)}`);
 
-    await client.git.updateRef({
-      owner: github.context.repo.owner,
-      repo: github.context.repo.repo,
-      ref: `tags/${tag}`,
-      sha: sha,
-      force: true
-    });
+    if (exists) {
+      await client.git.updateRef({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        ref: `tags/${tag}`,
+        sha: sha,
+        force: true
+      });
+    } else {
+      await client.git.createRef({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        ref: `refs/tags/${tag}`,
+        sha: sha
+      });
+    }
   } catch (error) {
     core.error(error);
     core.setFailed(error.message);
