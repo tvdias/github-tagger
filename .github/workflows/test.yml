@@ -1,0 +1,22 @@
+name: GitHub Tagger
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  
+  get_date_time_job:
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Test1
+        id: t1
+        uses: ./.github/actions/github-tagger
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          tag: TagTest-${{ steps.date.outputs.year }}${{ steps.date.outputs.month }}${{ steps.date.outputs.day }}-${{ github.run_number }}
