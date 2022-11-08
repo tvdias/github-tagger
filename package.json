@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "description": "Tags the commit with a given text",
-  "main": ".github/actions/lib/main.js",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write **/*.ts",
