@@ -26,7 +26,7 @@ function run() {
             const sha = core.getInput('commit-sha', { required: false }) || github.context.sha;
             const client = new github.getOctokit(token);
             core.debug(`tagging #${sha} with tag ${tag}`);
-            yield client.git.createRef({
+            yield client.rest.git.createRef({
                 owner: github.context.repo.owner,
                 repo: github.context.repo.repo,
                 ref: `refs/tags/${tag}`,
